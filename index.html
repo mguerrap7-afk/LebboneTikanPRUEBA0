@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Bonne Tikan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+:root{
+  --jade:#2F5E4E; --quetzal:#6FAE9A; --magenta:#D9893A; --sol:#F2C230;
+  --indigo:#6FB7B2; --hueso:#fbf7ef; --tinta:#2F5E4E; --suave:#2F5E4E;
+}
+body{margin:0;font-family:'Poppins','Segoe UI',Arial,sans-serif;color:var(--tinta);background:var(--hueso)}
+h1,h2,h3{font-family:'Bricolage Grotesque','Poppins',sans-serif;font-weight:800;line-height:1.05;margin:0}
+img{max-width:100%;display:block}
+
+/*MENÚ RESPONSIVE*/
+nav{position:fixed;top:0;left:0;width:100%;background:rgba(0,0,0,0.65);backdrop-filter:blur(6px);padding:10px 18px;z-index:1000;display:flex;align-items:center;justify-content:space-between}
+.menu-left{display:flex;align-items:center;gap:12px}
+.menu-logo{width:80px}
+.menu-toggle{font-size:30px;color:white;cursor:pointer;display:none}
+.menu-links{display:flex;gap:35px;margin:0 auto}
+.menu-links a{position:relative;color:rgba(255,255,255,0.85);text-decoration:none;font-size:15px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:6px 2px;transition:color .3s ease}
+.menu-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0%;height:2px;background:linear-gradient(90deg,#4db8ff,#7fe0d6);transition:width .35s ease;border-radius:2px}
+.menu-links a:hover{color:#fff}
+.menu-links a:hover::after{width:100%}
+.contacto-wrapper{position:relative}
+.correo-popup{position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);background:#fff;color:#10202b;padding:10px 18px;border-radius:8px;font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;white-space:nowrap;box-shadow:0 10px 24px rgba(0,0,0,.25);opacity:0;visibility:hidden;transition:opacity .2s ease,transform .2s ease}
+.correo-popup.visible{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.correo-popup::before{content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%);border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:6px solid #fff}
+@media (max-width:768px){
+  .menu-logo{width:60px}
+  nav{justify-content:space-between}
+  .menu-toggle{display:block}
+  .menu-links{position:fixed;top:0;right:-65%;height:100vh;width:65%;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);flex-direction:column;padding-top:80px;padding-left:35px;gap:25px;transition:right .3s ease;margin:0}
+  #menu-checkbox:checked ~ .menu-links{right:0}
+  .menu-links a{font-size:16px;letter-spacing:1.5px}
+  .menu-links a::after{bottom:-4px}
+}
+
+/*HEADER HERO */
+header{position:relative;height:65vh;background-image:url('porta.jpeg');background-size:cover;background-position:center;background-attachment:fixed;display:flex;justify-content:center;align-items:center;margin-top:70px}
+header::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.45)}
+.hero-logo{position:relative;z-index:2;width:600px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))}
+@media (max-width:600px){header{height:50vh;background-attachment:scroll;background-position:center top}.hero-logo{width:220px}}
+
+
+/* Cinta tejida: separador inspirado en textiles mayas */
+.tejido{height:14px;background:repeating-linear-gradient(90deg,var(--magenta) 0 28px,var(--sol) 28px 56px,var(--quetzal) 56px 84px,var(--indigo) 84px 112px)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.foto{background-color:var(--quetzal);background-image:var(--img);background-size:cover;background-position:center}
+section p{line-height:1.75}
+
+/* 1 · Qué somos:imagen en arco */
+.s1{padding:90px 0;background:var(--hueso)}
+.s1 .wrap{display:grid;grid-template-columns:5fr 7fr;gap:56px;align-items:center}
+.s1 .arco{aspect-ratio:3/4;border-radius:999px 999px 14px 14px;border:6px solid var(--sol);outline:2px solid var(--jade);outline-offset:8px}
+.s1 h2{font-size:clamp(2.4rem,6vw,4.6rem);color:var(--jade)}
+.s1 h2 span{display:block}
+.s1 h2 span:nth-child(2){color:var(--magenta);padding-left:1.2em}
+.s1 h2 span:nth-child(3){color:var(--jade);padding-left:2.4em}
+
+/* 2 · Referencia: imagen circular con cita */
+.s2{background:var(--jade);color:var(--hueso);padding:100px 0}
+.s2 .wrap{display:grid;grid-template-columns:7fr 5fr;gap:60px;align-items:center}
+.s2 blockquote{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(1.4rem,3vw,2.1rem);line-height:1.35}
+.s2 p{color:rgba(251,247,239,.75);max-width:52ch;margin:22px 0 0}
+.s2 .redondo{aspect-ratio:1;border-radius:50%;box-shadow:0 0 0 10px var(--jade),0 0 0 14px var(--sol)}
+
+/* 3 · Qué ofrecemos: tres bloques de color escalonados */
+.s3{padding:100px 0 130px;background:var(--hueso)}
+.s3 h2{font-size:clamp(2rem,4vw,3rem);color:var(--jade);margin-bottom:50px}
+.s3 .tres{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
+.s3 .bloque{padding:34px 28px 40px;color:#fff;border-radius:6px 6px 60px 6px}
+.s3 .bloque:nth-child(1){background:var(--magenta)}
+.s3 .bloque:nth-child(2){background:var(--indigo);color:var(--jade);margin-top:40px}
+.s3 .bloque:nth-child(3){background:var(--sol);color:var(--jade);margin-top:80px}
+.s3 .bloque:nth-child(1){background:var(--jade)}
+.s3 .bloque:nth-child(n+2) p{color:var(--jade)}
+.s3 h3{font-size:1.45rem;margin-bottom:12px}
+.s3 .bloque p{margin:0;font-size:.95rem;color:rgba(255,255,255,.88)}
+
+/* 4 · Traslados cortos: ruta con paradas */
+.s4{position:relative;color:#fff;padding:110px 0;overflow:hidden}
+.s4 .fondo{position:absolute;inset:0}
+.s4 .fondo::after{content:"";position:absolute;inset:0;background:rgba(47,94,78,.75)}
+.s4 .wrap{position:relative;z-index:2}
+.s4 h2{font-size:clamp(2rem,4vw,3rem)}
+.s4 p{max-width:50ch;margin:14px 0 54px;color:rgba(255,255,255,.85)}
+.ruta{display:flex;justify-content:space-between;position:relative;list-style:none;padding:0;margin:0}
+.ruta::before{content:"";position:absolute;left:8px;right:8px;top:9px;border-top:3px dashed var(--sol)}
+.ruta li{position:relative;padding-top:34px;font-weight:600}
+.ruta li::before{content:"";position:absolute;top:0;left:0;width:20px;height:20px;border-radius:50%;background:var(--sol);border:4px solid var(--jade)}
+.ruta li:last-child{text-align:right}
+.ruta li:last-child::before{left:auto;right:0}
+
+/* 5 · Naturaleza: lugares como tipografía grande */
+.s5{background:var(--quetzal);color:var(--jade);padding:100px 0}
+.s5 h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:40px;max-width:14ch}
+.s5 ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px 30px}
+.s5 li{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(1.7rem,4.2vw,3.2rem);color:var(--jade);transition:color .25s,transform .25s;cursor:default}
+.s5 li:hover{color:#fff;transform:translateX(6px)}
+
+.s5 .fotos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px}
+.s5 .fotos div{aspect-ratio:3/4;border-radius:6px}
+
+/* 6 · Cultura maya: franja textil + texto */
+.s6{background:var(--hueso)}
+.s6 .wrap{display:grid;grid-template-columns:6fr 6fr;gap:56px;align-items:center;padding-top:100px;padding-bottom:100px}
+.s6 .textil{aspect-ratio:4/5;border-radius:6px;background-position:center 60%}
+.s6 h2{font-size:clamp(2rem,4vw,3rem);color:var(--jade);margin-bottom:18px}
+.s6 p{color:var(--suave);max-width:48ch}
+
+/* 7 · Espíritu aventurero: pantalla completa con sello inclinado */
+.s7{position:relative;min-height:520px;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;background:var(--jade)}
+.s7 .fondo{position:absolute;inset:0}
+.s7 .fondo::after{content:"";position:absolute;inset:0;background:rgba(47,94,78,.6)}
+.s7 .contenido{position:relative;z-index:2;max-width:620px;padding:60px 24px}
+.s7 h2{font-size:clamp(2.4rem,6vw,4.4rem);display:inline-block;background:var(--sol);color:var(--tinta);padding:10px 26px;transform:rotate(-3deg);margin-bottom:30px}
+.s7 p{margin:0;font-size:1.05rem}
+
+/* 8 · Crea tu itinerario: selector interactivo */
+.s8{background:var(--hueso);padding:100px 0}
+.s8 .wrap{max-width:820px}
+.s8 h2{font-size:clamp(2rem,4vw,3rem);color:var(--jade);margin-bottom:14px}
+.s8 p{color:var(--suave);margin:0 0 30px}
+.opciones{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.opciones button{font:inherit;font-weight:500;padding:11px 20px;border-radius:999px;border:2px solid var(--jade);background:transparent;color:var(--jade);cursor:pointer;transition:.2s}
+.opciones button[aria-pressed="true"]{background:var(--jade);color:#fff}
+.opciones button:focus-visible,.btn:focus-visible{outline:3px solid var(--magenta);outline-offset:3px}
+.btn{display:inline-block;padding:15px 34px;background:var(--magenta);color:var(--jade);text-decoration:none;font:inherit;font-weight:600;border:0;cursor:pointer;border-radius:4px}
+.btn:hover{background:var(--sol)}
+
+/* Contacto */
+.contacto{background:var(--jade);color:var(--hueso);padding:100px 0}
+.contacto .wrap{display:grid;grid-template-columns:5fr 7fr;gap:56px}
+.contacto h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:16px}
+.contacto p{color:rgba(251,247,239,.75)}
+.vias{align-self:center}
+.via{display:block;padding:26px 0;border-top:2px solid rgba(251,247,239,.35);border-bottom:2px solid rgba(251,247,239,.35);color:#fff;text-decoration:none}
+.via span{display:block;font-size:.9rem;color:rgba(251,247,239,.7);margin-bottom:6px}
+.via strong{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.4rem,3.4vw,2.2rem);overflow-wrap:anywhere}
+.via:hover strong{color:var(--sol)}
+.contacto input,.contacto textarea{width:100%;padding:14px 0;margin-bottom:20px;border:0;border-bottom:2px solid rgba(251,247,239,.35);background:transparent;color:#fff;font:inherit;outline:none}
+.contacto input::placeholder,.contacto textarea::placeholder{color:rgba(251,247,239,.55)}
+.contacto input:focus,.contacto textarea:focus{border-bottom-color:var(--sol)}
+.contacto .btn{background:var(--sol);color:var(--tinta)}
+.btn-wa{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;background:#25d366;color:#0b2e17;text-decoration:none;font-weight:600;border-radius:4px;margin-top:10px}
+.btn-wa:hover{background:#1fb858}
+.btn-wa svg{width:22px;height:22px;fill:currentColor}
+.s8 .acciones{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.s8 .btn-wa{margin-top:0}
+footer{background:var(--tinta);color:rgba(255,255,255,.6);text-align:center;padding:26px;font-size:.85rem}
+
+@media (max-width:768px){
+  .s1 .wrap,.s2 .wrap,.s6 .wrap,.contacto .wrap{grid-template-columns:1fr;gap:36px}
+  .s1 .arco{max-width:300px}
+  .s2 .redondo{max-width:280px;order:-1}
+  .s5 .fotos{gap:8px}
+  .s3 .tres{grid-template-columns:1fr}
+  .s3 .bloque:nth-child(n){margin-top:0}
+  .ruta{flex-direction:column;gap:22px;padding-left:34px}
+  .ruta::before{left:9px;right:auto;top:8px;bottom:8px;border-top:0;border-left:3px dashed var(--sol)}
+  .ruta li{padding:0}
+  .ruta li::before,.ruta li:last-child::before{left:-34px;right:auto;top:0}
+  .ruta li:last-child{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- MENÚ -->
+<nav>
+    <div class="menu-left">
+        <label for="menu-checkbox" class="menu-toggle">&#9776;</label>
+        <img src="Isotipodigitallebonnetikan.png" class="menu-logo" alt="Logo">
+    </div>
+    <input type="checkbox" id="menu-checkbox" style="display:none;">
+    <div class="menu-links">
+        <a href="#">Inicio</a>
+        <a href="#">Destinos</a>
+        <a href="#">Tours</a>
+        <div class="contacto-wrapper">
+            <a href="#" class="link-contacto" onclick="event.preventDefault(); document.getElementById('correo-popup').classList.toggle('visible');">Contacto</a>
+            <div id="correo-popup" class="correo-popup">lebonnetikan@gmail.com</div>
+        </div>
+    </div>
+</nav>
+
+<!-- HEADER -->
+<header>
+    <img src="logoblancocompledigitalebotikan.png" class="hero-logo" alt="Logo Principal">
+</header>
+
+<div class="tejido"></div>
+
+<!-- 1 · QUÉ SOMOS?-->
+<section class="s1">
+    <div class="wrap">
+        <div class="arco foto" style="--img:url('tikal-templo.jpg')" role="img" aria-label="Qué somos"></div>
+        <h2>
+            <span>Facilitadores de viaje</span>
+            <span>Agencia de viajes</span>
+            <span>Creadores de experiencias</span>
+        </h2>
+    </div>
+</section>
+
+<!-- 2 · PEQUEÑA REFERENCIA -->
+<section class="s2">
+    <div class="wrap">
+        <div>
+            <blockquote>Conocemos el terreno, las rutas y los tiempos reales de Guatemala.</blockquote>
+            <p>Operamos en el país coordinando circuitos, traslados y experiencias a la medida del viajero, para que cada itinerario se cumpla con precisión.</p>
+        </div>
+        <div class="redondo foto" style="--img:url('lago-selva.jpg')" role="img" aria-label="Sobre nosotros"></div>
+    </div>
+</section>
+
+<!-- 3 · QUÉ OFRECEMOS -->
+<section class="s3">
+    <div class="wrap">
+        <h2>Qué ofrecemos</h2>
+        <div class="tres">
+            <div class="bloque">
+                <h3>Planificación de circuitos</h3>
+                <p>Itinerarios diseñados según el tiempo disponible y los intereses de cada viajero.</p>
+            </div>
+            <div class="bloque">
+                <h3>Traslados por agua y tierra</h3>
+                <p>Movilidad dentro del país, coordinada punto a punto según el destino.</p>
+            </div>
+            <div class="bloque">
+                <h3>Creación de experiencias</h3>
+                <p>Actividades y recorridos diseñados a partir de lo que el viajero busca conocer.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4 · TRASLADOS CORTOS -->
+<section class="s4">
+    <div class="fondo foto" style="--img:url('lago-horizonte.jpg');background-position:center 55%;background-color:var(--jade)"></div>
+    <div class="wrap">
+        <h2>Traslados cortos</h2>
+        <p>Traslados de una sola vía hacia los destinos de mayor demanda dentro del país.</p>
+        <ul class="ruta">
+            <li>Aeropuerto</li>
+            <li>Panajachel</li>
+            <li>Pacaya</li>
+            <li>Chichicastenango</li>
+        </ul>
+    </div>
+</section>
+
+<!-- 5 · NATURALEZA -->
+<section class="s5">
+    <div class="wrap">
+        <h2>Conecta con la naturaleza</h2>
+        <ul>
+            <li>Lago de Atitlán</li>
+            <li>Semuc Champey</li>
+            <li>Cuevas de Candelaria</li>
+            <li>Laguna Brava</li>
+            <li>Cráter Azul</li>
+            <li>El Remate</li>
+        </ul>
+        <div class="fotos">
+            <div class="foto" style="--img:url('semuc.jpg')" role="img" aria-label="Pozas de Semuc Champey"></div>
+            <div class="foto" style="--img:url('cueva.jpg')" role="img" aria-label="Cueva con vista a la selva"></div>
+            <div class="foto" style="--img:url('amanecer-selva.jpg');background-position:50% 60%" role="img" aria-label="Amanecer sobre la selva"></div>
+        </div>
+    </div>
+</section>
+
+<!-- 6 · CULTURA MAYA -->
+<section class="s6">
+    <div class="wrap">
+        <div class="textil foto" style="--img:url('iglesia-amarilla.jpg')" role="img" aria-label="Iglesia colorida de los Altos de Guatemala"></div>
+        <div>
+            <h2>Viaja a través de la cultura maya</h2>
+            <p>Recorridos por mercados, textiles y sitios que mantienen viva la herencia de los pueblos mayas de Guatemala.</p>
+        </div>
+    </div>
+</section>
+
+<!-- 7 · ESPÍRITU AVENTURERO -->
+<section class="s7">
+    <div class="fondo foto" style="--img:url('amanecer-selva.jpg');background-position:50% 58%;background-color:var(--jade)"></div>
+    <div class="contenido">
+        <h2>Espíritu aventurero</h2>
+        <p>Rutas compartidas al estilo mochilero, pensadas para quienes prefieren viajar en grupo y conocer a otros viajeros en el camino.</p>
+    </div>
+</section>
+
+<!-- 8 · CREA TU ITINERARIO -->
+<section class="s8">
+    <div class="wrap">
+        <h2>Crea tu propio itinerario</h2>
+        <p>Elige los lugares que quieres conocer. Nosotros nos encargamos de la logística y los traslados.</p>
+        <div class="opciones" id="opciones">
+            <button aria-pressed="false">Lago de Atitlán</button>
+            <button aria-pressed="false">Semuc Champey</button>
+            <button aria-pressed="false">Volcán de Pacaya</button>
+            <button aria-pressed="false">Chichicastenango</button>
+            <button aria-pressed="false">Cuevas de Candelaria</button>
+            <button aria-pressed="false">El Remate</button>
+        </div>
+        <div class="acciones">
+            <a href="#" class="btn" data-mail="itinerario">Pedir por correo</a>
+            <a href="#" class="btn-wa" data-wa="itinerario" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>
+                Pedir por WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
+<div class="tejido"></div>
+
+<!-- CONTACTO -->
+<section class="contacto" id="contacto">
+    <div class="wrap">
+        <div>
+            <h2>Escríbenos</h2>
+            <p>Cuéntanos qué destino te interesa o qué tipo de experiencia buscas y te respondemos a la brevedad.</p>
+            <a href="#" class="btn-wa" data-wa="contacto" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>
+                Escribir por WhatsApp
+            </a>
+        </div>
+        <div class="vias">
+            <a class="via" href="#" data-mail="contacto">
+                <span>Correo</span>
+                <strong data-correo>correo</strong>
+            </a>
+            <p>Si no se abre tu programa de correo, copia la dirección y escríbenos desde donde prefieras.</p>
+        </div>
+    </div>
+</section>
+
+<footer>We are Le Bonne Tikan</footer>
+
+<script>
+  // Cambia estos dos datos
+  const NUMERO_WA = '50200000000';          
+  const CORREO    = 'contacto';
+
+  const botones = document.querySelectorAll('#opciones button');
+  botones.forEach(b => b.addEventListener('click', () =>
+    b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true')));
+
+  document.querySelectorAll('[data-correo]').forEach(el => el.textContent = CORREO);
+
+  function mensaje() {
+    const lugares = [...botones].filter(b => b.getAttribute('aria-pressed') === 'true').map(b => b.textContent);
+    return lugares.length
+      ? 'Hola, me gustaría un itinerario que incluya: ' + lugares.join(', ') + '.'
+      : 'Hola, me gustaría información sobre sus viajes en Guatemala.';
+  }
+
+  document.querySelectorAll('[data-wa]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    window.open('https://wa.me/' + NUMERO_WA + '?text=' + encodeURIComponent(mensaje()), '_blank', 'noopener');
+  }));
+
+  document.querySelectorAll('[data-mail]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    window.location.href = 'mailto:' + CORREO + '?subject=' + encodeURIComponent('Consulta de viaje') + '&body=' + encodeURIComponent(mensaje());
+  }));
+</script>
+</body>
+</html>
